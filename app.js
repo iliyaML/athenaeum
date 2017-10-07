@@ -4,6 +4,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+const path = require('path');
 
 const app = express();
 
@@ -19,6 +20,7 @@ require('./config/passport')(passport);
 // routes
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const records = require('./routes/records');
 
 // mongodb connection
 mongoose.Promise = global.Promise;
@@ -48,6 +50,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Global variables
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
@@ -57,6 +61,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/records', records);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
