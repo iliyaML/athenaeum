@@ -1,2 +1,31 @@
 <h1>Welcome {{user.firstName}}</h1>
 <h4>Your Records</h4>
+{{#if records}}
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each records}}
+        <tr>
+          <td><a href="/records/{{id}}">{{ title }}</a></td>
+          <td>{{ formatDate data 'MMMM do YYYY' }}</td>
+          <td><span class="dash-status">{{ status }}</span></td>
+          <td>
+            <a href="/records/edit/{{ id }}" class="btn left-align"><i class="fa fa-pencil"></i> Edit</a>
+            <form id="delete-form" action="/records/{{id}}" method="post">
+              <button type="submit" name="button" class="btn red"><i class="fa fa-remove"></i> Delete</button>
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>You have not created any records yet</p>
+{{/if}}
