@@ -7,7 +7,13 @@ const User = mongoose.model('users');
 
 // Index
 router.get('/', (req, res) => {
-  res.render('records/index');
+  Record.find({ status: 'public' })
+  .populate('user')
+  .then(records => {
+    res.render('records/index', {
+      records: records
+    })
+  });
 });
 
 // add
