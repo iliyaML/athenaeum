@@ -1,1 +1,38 @@
 <h1>Add Record</h1>
+<div class="row">
+  <form class="col s12" action="/records" method="post">
+    <div class="row">
+      <div class="input-field">
+        <input type="text" name="title" value="">
+        <label for="title">Title</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <select name="status">
+          <option value="public" selected>Public</option>
+          <option value="private">Private</option>
+          <option value="unpublished">Unpublished</option>
+        </select>
+        <label for="status">Status</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <p>
+        <input type="checkbox" name="allowComments" class="filled-in" id="filled-in-box" value="" checked="checked">
+        <label for="allowComments">Allow Comments</label>
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <h5>Record</h5>
+        <textarea name="editor" rows="8" cols="80"></textarea>
+      </div>
+    </div>
+
+    <input type="submit" name="submit" value="Submit" class="btn">
+  </form>
+</div>
