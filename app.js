@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const keys = require('./config/keys');
 
-const { truncate, stripTags, formatDate } = require('./helpers/hbs');
+const { truncate, stripTags, formatDate, select } = require('./helpers/hbs');
 
 // load user model
 require('./models/Users');
@@ -39,7 +39,8 @@ app.engine('handlebars', exphbs({
   helpers: {
     truncate: truncate,
     stripTags: stripTags,
-    formatDate: formatDate
+    formatDate: formatDate,
+    select: select
   },
   defaultLayout: 'main'
 }));
