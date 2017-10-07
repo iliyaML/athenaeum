@@ -31,18 +31,24 @@ app.get('/', (req, res) => {
 });
 
 // CookieParser middleware
-app.use(cookieParser())
+app.use(cookieParser());
 
 // Session middleware
 app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: true
-}))
+}));
 
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Global variables
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Routes
 app.use('/auth', auth);

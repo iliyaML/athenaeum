@@ -23,11 +23,9 @@ module.exports = function(passport){
         .then(user => {
           if(user){
             // Return user
-            console.log(profile);
             done(null, user);
           } else {
             // Create user
-            console.log('create user');
             const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
             const newUser = {
               googleID: profile.id,
