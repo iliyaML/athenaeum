@@ -28,6 +28,12 @@ mongoose.connect(keys.mongoURI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log(err));
 
+// Handlebars
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars');
+
 // CookieParser middleware
 app.use(cookieParser());
 
