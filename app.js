@@ -16,6 +16,7 @@ require('./models/Users');
 require('./config/passport')(passport);
 
 // routes
+const index = require('./routes/index');
 const auth = require('./routes/auth');
 
 // mongodb connection
@@ -25,10 +26,6 @@ mongoose.connect(keys.mongoURI, {
 })
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log(err));
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
 
 // CookieParser middleware
 app.use(cookieParser());
@@ -51,6 +48,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.use('/', index);
 app.use('/auth', auth);
 
 app.listen(PORT, () => {
