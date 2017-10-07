@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -13,6 +14,7 @@ const keys = require('./config/keys');
 
 // load user model
 require('./models/Users');
+require('./models/Records');
 
 // passport config
 require('./config/passport')(passport);
@@ -35,6 +37,13 @@ app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+
+// BodyParser middleware
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // CookieParser middleware
 app.use(cookieParser());
