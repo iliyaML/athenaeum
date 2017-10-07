@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const exphbs = require('express-handlebars');
 
 const app = express();
 
