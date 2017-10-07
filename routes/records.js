@@ -16,6 +16,17 @@ router.get('/', (req, res) => {
   });
 });
 
+// Single record
+router.get('/:id', (req, res) => {
+  Record.findOne({ _id: req.params.id })
+  .populate('user')
+  .then(record => {
+    res.render('records/show', {
+      record: record
+    });
+  })
+});
+
 // add
 router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('records/add');
@@ -40,7 +51,7 @@ router.post('/', (req, res) => {
   new Record(newRecord)
   .save()
   .then(record => {
-    res.redirect(`/records/show/${record.id}`);
+    res.redirect(`/records/${record.id}`);
   });
 });
 
