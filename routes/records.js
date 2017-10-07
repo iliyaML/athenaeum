@@ -12,4 +12,9 @@ router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('records/add');
 });
 
+// process add form
+router.post('/', (req, res) => {
+  res.send('sent');
+});
+
 module.exports = router;
