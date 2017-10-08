@@ -66,6 +66,14 @@ router.put('/:id', (req, res) => {
   })
 });
 
+// Delete
+router.delete('/:id', (req, res) => {
+  Record.remove({
+    _id: req.params.id
+  })
+  .then(() => res.redirect('/dashboard'));
+});
+
 // process add form
 router.post('/', (req, res) => {
   let allowComments = false;
