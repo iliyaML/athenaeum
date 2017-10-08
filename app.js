@@ -6,6 +6,7 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -45,6 +46,9 @@ app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+
+// MethodOverride middleware
+app.use(methodOverride('_method'));
 
 // BodyParser middleware
 // parse application/x-www-form-urlencoded

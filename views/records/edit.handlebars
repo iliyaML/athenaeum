@@ -1,6 +1,7 @@
 <h1>Edit Record</h1>
 <div class="row">
-  <form class="col s12" action="/records" method="post">
+  <form class="col s12" action="/records/{{ record.id }}?_method=PUT" method="post">
+    <input type="hidden" name="_method" value="PUT">
     <div class="row">
       <div class="input-field">
         <input type="text" name="title" value="{{ record.title }}">

@@ -42,6 +42,30 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
   });
 });
 
+// Edit form process
+router.put('/:id', (req, res) => {
+  Record.findOne({
+    _id: req.params.id
+  })
+  .then(record => {
+    let allowComments = false;
+
+    if(req.body.allowComments){
+      allowComments = true;
+    }
+
+    record.title = req.body.title;
+    record.body = req.body.body;
+    record.status = req.body.status;
+    record.allowComments = allowComments;
+
+    record.save()
+    .then(record => {
+      res.redirect('/dashboard');
+    });
+  })
+});
+
 // process add form
 router.post('/', (req, res) => {
   let allowComments = false;
