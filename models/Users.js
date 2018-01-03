@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// User model
+// User Model
 const UserSchema = new Schema({
   googleID: {
     type: String,

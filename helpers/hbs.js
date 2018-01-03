@@ -2,13 +2,13 @@ const moment = require('moment');
 
 module.exports = {
   truncate: (str, len) => {
-    if(str.length > len && str.length > 0){
+    if (str.length > len && str.length > 0) {
       let new_str = str + " ";
       new_str = str.substr(0, len);
       new_str = str.substr(0, new_str.lastIndexOf(" "));
       new_str = (new_str.length > 0) ? new_str : str.substr(0, len);
       return new_str + '...';
-      }
+    }
     return str;
   },
   stripTags: (input) => {
@@ -18,6 +18,17 @@ module.exports = {
     return moment(date).format(format);
   },
   select: (selected, options) => {
-    return options.fn(this).replace( new RegExp(' value=\"' + selected + '\"'), '$& selected="selected"').replace( new RegExp('>' + selected + '</option>'), ' selected="selected"$&');
+    return options.fn(this).replace(new RegExp(' value=\"' + selected + '\"'), '$& selected="selected"').replace(new RegExp('>' + selected + '</option>'), ' selected="selected"$&');
+  },
+  editIcon: (recordUser, loggedUser, recordId, floating = true) => {
+    if(recordUser == loggedUser){
+      if(floating){
+        return `<a href="/records/edit/${recordId}" class="btn-floating halfway-fab red"><i class="fa fa-pencil"></i></a>`;
+      } else {
+        return `<a href="/records/edit/${recordId}"><i class="fa fa-pencil"></i></a>`;
+      }
+    } else {
+      return '';
+    }
   }
 };

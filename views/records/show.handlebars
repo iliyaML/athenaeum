@@ -1,13 +1,50 @@
 <br>
 <div class="row">
   <div class="col s12 m8">
-    <div class="card story">
+    <div class="card">
+      <div class="card-image">
+        {{{editIcon record.user.id user.id record.id}}}
+      </div>
       <div class="card-content">
-        <span class="card-title"><b>{{ record.title }}</b>, <small>{{ formatDate record.date 'MMMM Do YYYY' }}</small></span>
+        <span class="card-title">
+          <b>{{ record.title }}</b>,
+          <small>{{ formatDate record.date 'MMMM Do YYYY' }}</small>
+        </span>
         {{ stripTags record.body }}
       </div>
     </div>
+
+    {{#if record.allowComments}}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Comments</span>
+        {{#if user}}
+        <form method="post" action="/records/comment/{{record.id}}">
+          <div class="input-field">
+            <textarea name="commentBody" class="materialize-textarea" id="" cols="30" rows="10"></textarea>
+            <label for="commentBody">Add Comment</label>
+            <input type="submit" class="btn" value="Submit">
+          </div>
+        </form>
+        {{else}} Please
+        <a href="/auth/google">log in</a> to leave a comment. {{/if}}
+      </div>
+    </div>
+
+    {{#each record.comments}}
+    <div class="card">
+      <div class="card-content">
+        <h5>{{ commentBody }}</h5>
+        <div class="chip">
+          <img src="{{commentUser.image}}" alt="{{commentUser.firstName}}"> <a href="/users/{{ commentUser.id }}">{{commentUser.firstName}}</a>
+        </div>
+        <br>
+        <small>Posted: {{formatDate commentDate 'MMMM Do YYYY'}}</small>
+      </div>
+    </div>
+    {{/each}} {{/if}}
   </div>
+
   <div class="col s12 m4">
     <div class="card center-align">
       <div class="card-content">
@@ -15,7 +52,7 @@
         <img src="{{ record.user.image }}" alt="{{ record.user.firstName }}" class="circle responsive-img">
       </div>
       <div class="card-action">
-        <a href="/users/records/{{ record.user.id }}">More From {{ record.user.firstName }}</a>
+        <a href="/users/{{ record.user.id }}">More From {{ record.user.firstName }}</a>
       </div>
     </div>
   </div>

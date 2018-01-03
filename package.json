@@ -1,7 +1,7 @@
 {
   "name": "athenaeum",
-  "version": "1.0.0",
-  "description": "platform to share information",
+  "version": "2.0.0",
+  "description": "A platform to share information",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
@@ -10,10 +10,13 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.1",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
+    "helmet": "^3.9.0",
+    "heroku-ssl-redirect": "0.0.4",
     "method-override": "^2.3.10",
     "moment": "^2.18.1",
     "mongoose": "^4.12.0",

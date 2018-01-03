@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Record model
+// Record Model
 const RecordSchema = new Schema({
   title: {
     type: String,
